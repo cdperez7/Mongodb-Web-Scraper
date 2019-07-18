@@ -1,0 +1,35 @@
+var request = require("request");
+var cheerio = require("cheerio");
+
+var scrape = function(cb){
+
+    request("https://www.chicagotribune.com/", function(err, res, body){
+
+        var $ = cheerio.load(body);
+
+        var articles = [];
+
+        $(".card-content").each(function(i, element){
+            var head = $(this).children("h6").text().trim();
+            var sum = $(this).children(".story-recommender").text().trim();
+
+            if(head && sum){
+                var headNeat = head.replace(/(\r\n|\r|\t|\s+)/gm, " ").trim();
+                var sumNeat = sum.replace(/(\r\n|\r|\t|\s+)/gm, " ").trim();
+
+                var dataToAdd = {
+                    headline: headNeat,
+                    summary: sumNeat
+                };
+
+                articles.push(dataToAdd);
+            }
+
+        });
+
+        cb(articles);
+        console.log(articles);
+    });
+};
+
+module.exports = scrape;
