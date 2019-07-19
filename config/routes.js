@@ -1,6 +1,6 @@
 var scrape = require("../scripts/scrape");
 
-var headliesController = require("../controllers/headlines");
+var headlinesController = require("../controllers/headlines");
 var notesController = require("../controllers/notes");
 
 
@@ -17,7 +17,7 @@ module.exports = function(router){
     });
 
     router.get("/api/fetch", function(req, res){
-        headliesController.fetch(function(err, docs){
+        headlinesController.fetch(function(err, docs){
             if (!docs || docs.insertedCount === 0){
                 res.json({
                     message: "Nothing new to add"
@@ -37,7 +37,7 @@ module.exports = function(router){
             query = req.query;
         }
 
-        headliesController.get(query, function(data){
+        headlinesController.get(query, function(data){
             res.json(data);
         });
     });
@@ -45,18 +45,18 @@ module.exports = function(router){
     router.delete("/api/headlines/:id", function(req, res){
         var query = {};
         query._id = req.params.id;
-        headliesController.delete(query, function(err, data){
+        headlinesController.delete(query, function(err, data){
             res.json(data);
         });
     });
 
     router.patch("/api/headlines", function(req, res){
-        headliesController.update(req.body, function(err, data){
+        headlinesController.update(req.body, function(err, data){
             res.json(data);
         });
     });
 
-    router.get("/api/notes:headline_id?", function(req, res){
+    router.get("/api/notes/:headline_id?", function(req, res){
         var query = {};
         if (req.params.headline_id){
             query._id = req.params.headline_id;
@@ -67,7 +67,7 @@ module.exports = function(router){
         });
     });
 
-    router.delete("/api/notes:id", function(req, res){
+    router.delete("/api/notes/:id", function(req, res){
         var query = {};
         query._id = req.params.id;
         notesController.delete(query, function(err, data){
@@ -80,4 +80,4 @@ module.exports = function(router){
             res.json(data)
         });
     });
-}
+};

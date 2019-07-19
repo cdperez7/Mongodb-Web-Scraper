@@ -1,8 +1,8 @@
-$(document).ready(function(){
+$(document).ready(function() {
 
     var articleContainer = $(".article-container");
     $(document).on("click", ".btn.save", handleArticleSave);
-    $(document).on("click", "scrape-new", handleArticleScrape);
+    $(document).on("click", ".scrape-new", handleArticleScrape);
 
 
     initPage();
@@ -24,7 +24,7 @@ $(document).ready(function(){
 
         var articlePanels = [];
 
-        for (vari=0; i<articles.length; i++){
+        for (var i = 0; i < articles.length; i++){
             articlePanels.push(createPanel(articles[i]));
         }
 
@@ -65,6 +65,7 @@ $(document).ready(function(){
         "<h3>What would you like to do?</h3>",
         "</div>",
         "<div class'panel-body text-center'>",
+        "<h4><a class='scrape-new'>Scrape new articles</a></h4>",
         "<h4><a href='/saved>Go to saved articles</a></h4>",
         "</div>",
         "</div>"
@@ -96,7 +97,7 @@ $(document).ready(function(){
         .then(function(data){
 
             initPage();
-            bootbox.alert("<h3 class='text-center m-top-80'>" + data.message + "</h3>");
+            alert( data.message);
         });
     }
 
