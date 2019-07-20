@@ -97,7 +97,7 @@ $(document).ready(function() {
         .then(function(data){
 
             initPage();
-            alert( data.message);
+            alert(data.message);
         });
     }
 

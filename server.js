@@ -1,5 +1,6 @@
 var express = require("express");
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
+mongoose.set('useCreateIndex', true);
 var expressHandlebars = require("express-handlebars");
 var bodyParser = require("body-parser");
 
@@ -25,15 +26,17 @@ app.use(bodyParser.urlencoded({
 
 app.use(router);
 
-var db = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+var db = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines" ;
 
-mongoose.connect(db, function(error){
-    if (error){
-        console.log(error);
-    } else {
-        console.log("connected to mongoose")
-    }
-});
+// mongoose.connect(db, function(error){
+//     if (error){
+//         console.log(error);
+//     } else {
+//         console.log("connected to mongoose")
+//     }
+// });
+
+mongoose.connect(db, { useNewUrlParser: true });
 
 
 
