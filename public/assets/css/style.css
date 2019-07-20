@@ -3,6 +3,17 @@ body {
     padding-top: 70px;
 }
 
+.jumbotron{
+    background-color: black;
+    color: white;
+}
+
+.panel-body{
+    background-color: black;
+    color: white;
+}
+
+
 .deleteNote {
 	display: inline-block;
 }
@@ -14,4 +25,20 @@ body {
 
 #scrape {
     margin: 8px 0px;
+}
+
+.jumbotron{
+    background-color: black;
+    color: black;
+    background-image: url("../images/jumbotronbackground.jpg");
+    background-size: cover;
+    height: 350px;
+    font-weight: bold;
+    padding-top: 10px;
+
+}
+
+.panel-body{
+    background-color: black;
+    color: white;
 }
