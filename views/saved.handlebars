@@ -1,23 +1,40 @@
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">Saved Articles</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li><a href="/">Home</a></li>
-            <li class="active"><a href="/saved">Saved Articles</a></li>
-        </ul>
-    </div>
-</nav>
+<div class="container">
 
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <h1 class="display-4">Saved Articles</h1>
-        <p class="lead">Your Saved Articles</p>
+    <div class="col-md-12 jumbotron">
+        <div class="text-center">
+            <h1> Saved Articles</h1>
+        </div>
+    </div>
+    <div class="col-md-12">
+        {{#if article}}
+            {{#each article}}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>{{this.title}}</h4>
+                    </div>
+                    <div class="panel-body">
+                        <p> {{this.summary}}</p>
+                        <a href={{this.link}} target="_blank">{{this.link}}</a>
+                        <br><br>
+                        <button type="button" class="btn btn-success addNote" data-toggle="modal" data-target="#noteModal{{this._id}}" data-id={{this._id}}>View/Add Notes</button>
+                        <button type="button" class="btn btn-danger delete" data-id={{this._id}}>Delete</button>
+                    </div>
+                </div>
+            {{/each}}
+        {{else}}
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h4>There are no saved articles yet.</h4>
+            </div>
+        </div>
+        {{/if}}
     </div>
 </div>
 
-<div class="container-fluid article-container"></div>
+<!--Clicked Notes Modal-->
+{{#each article}}
+    {{> notes-modal }}
+{{/each}}
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
